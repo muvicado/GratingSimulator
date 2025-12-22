@@ -1,5 +1,6 @@
 import SwiftUI
 import SpriteKit
+import Combine
 
 // MARK: - Main App
 @main
@@ -13,22 +14,18 @@ struct GratingSimApp: App {
 
 // MARK: - Content View
 struct ContentView: View {
-    @State private var angle: Double = 0
+    @State private var angle: Double = 45
     @State private var gratingPitch: Double = 10.0
     @State private var wavelength: Double = 532
     @State private var distance: Double = 1000
-    @State private var maxOrder: Int = 3
+    @State private var maxOrder: Int = 2
+    @StateObject private var sceneDelegate = SceneDelegate()
 
     var scene: GratingScene {
-        let scene = GratingScene()
+        let scene = sceneDelegate.scene
         scene.size = CGSize(width: 600, height: 600)
-        scene.scaleMode = .aspectFit
+        scene.scaleMode = SKSceneScaleMode.aspectFit
         scene.backgroundColor = .black
-        scene.angle = angle
-        scene.gratingPitch = gratingPitch
-        scene.wavelength = wavelength
-        scene.distance = distance
-        scene.maxOrder = maxOrder
         return scene
     }
 
@@ -51,6 +48,21 @@ struct ContentView: View {
                         .stroke(Color.green, lineWidth: 2)
                 )
                 .padding(.horizontal)
+                .onChange(of: angle) { newValue in
+                    sceneDelegate.scene.angle = newValue
+                }
+                .onChange(of: gratingPitch) { newValue in
+                    sceneDelegate.scene.gratingPitch = newValue
+                }
+                .onChange(of: wavelength) { newValue in
+                    sceneDelegate.scene.wavelength = newValue
+                }
+                .onChange(of: distance) { newValue in
+                    sceneDelegate.scene.distance = newValue
+                }
+                .onChange(of: maxOrder) { newValue in
+                    sceneDelegate.scene.maxOrder = newValue
+                }
 
             // Controls
             ScrollView {
@@ -145,6 +157,16 @@ struct ContentView: View {
         }
         .background(Color(red: 0.1, green: 0.1, blue: 0.1))
         .edgesIgnoringSafeArea(.bottom)
+    }
+}
+
+// MARK: - Scene Delegate
+class SceneDelegate: ObservableObject {
+    let objectWillChange = ObservableObjectPublisher()
+    let scene: GratingScene
+
+    init() {
+        self.scene = GratingScene()
     }
 }
 
