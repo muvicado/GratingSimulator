@@ -2,16 +2,6 @@ import SwiftUI
 import SpriteKit
 import Combine
 
-// MARK: - Main App
-@main
-struct GratingSimApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-
 // MARK: - Content View
 struct ContentView: View {
     @State private var angle: Double = 45

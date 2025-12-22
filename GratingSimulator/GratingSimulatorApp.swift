@@ -8,7 +8,9 @@
 import SwiftUI
 import SwiftData
 
-//@main
+// MARK: - Main App
+
+@main
 struct GratingSimulatorApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
