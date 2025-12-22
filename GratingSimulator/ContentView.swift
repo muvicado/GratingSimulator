@@ -2,6 +2,9 @@ import SwiftUI
 import SpriteKit
 import Combine
 
+// configuration
+let SHOW_NONESSENTIAL_SLIDERS = false
+
 // MARK: - Content View
 struct ContentView: View {
     @State private var angle: Double = 45
@@ -60,7 +63,7 @@ struct ContentView: View {
                     // Grating Configuration Display
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Grating Configuration:")
-                            .font(.headline)
+                            .font(.subheadline)
                             .foregroundColor(.cyan)
 
                         VStack(alignment: .leading, spacing: 4) {
@@ -81,7 +84,7 @@ struct ContentView: View {
                     // Pair Rotation Angle
                     VStack(alignment: .leading) {
                         Text("Pair Rotation Angle: \(Int(angle))°")
-                            .font(.headline)
+                            .font(.subheadline)
                             .foregroundColor(.green)
                         Slider(value: $angle, in: 0...90, step: 1)
                             .accentColor(.green)
@@ -90,46 +93,10 @@ struct ContentView: View {
                             .foregroundColor(.gray)
                     }
 
-                    // Grating Pitch
-                    VStack(alignment: .leading) {
-                        Text("Grating Pitch: \(String(format: "%.1f", gratingPitch)) μm")
-                            .font(.headline)
-                            .foregroundColor(.green)
-                        Slider(value: $gratingPitch, in: 5...50, step: 1)
-                            .accentColor(.green)
-                        Text("Spacing between grating lines")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-
-                    // Wavelength
-                    VStack(alignment: .leading) {
-                        Text("Wavelength: \(Int(wavelength)) nm")
-                            .font(.headline)
-                            .foregroundColor(.green)
-                        Slider(value: $wavelength, in: 450...650, step: 1)
-                            .accentColor(.green)
-                        Text("Green laser: ~532nm")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-
-                    // Screen Distance
-                    VStack(alignment: .leading) {
-                        Text("Screen Distance: \(Int(distance)) mm")
-                            .font(.headline)
-                            .foregroundColor(.green)
-                        Slider(value: $distance, in: 500...3000, step: 100)
-                            .accentColor(.green)
-                        Text("Distance to projection screen")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-
                     // Max Order
                     VStack(alignment: .leading) {
                         Text("Max Diffraction Order: \(maxOrder)")
-                            .font(.headline)
+                            .font(.subheadline)
                             .foregroundColor(.green)
                         Slider(value: Binding(
                             get: { Double(maxOrder) },
@@ -139,6 +106,44 @@ struct ContentView: View {
                         Text("⚠️ Order 4 = \(Int(pow(Double(2 * 4 + 1), 4))) spots!")
                             .font(.caption)
                             .foregroundColor(.gray)
+                    }
+
+                    if SHOW_NONESSENTIAL_SLIDERS {
+                        // Grating Pitch
+                        VStack(alignment: .leading) {
+                            Text("Grating Pitch: \(String(format: "%.1f", gratingPitch)) μm")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                            Slider(value: $gratingPitch, in: 5...50, step: 1)
+                                .accentColor(.green)
+                            Text("Spacing between grating lines")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+
+                        // Wavelength
+                        VStack(alignment: .leading) {
+                            Text("Wavelength: \(Int(wavelength)) nm")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                            Slider(value: $wavelength, in: 450...650, step: 1)
+                                .accentColor(.green)
+                            Text("Green laser: ~532nm")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+
+                        // Screen Distance
+                        VStack(alignment: .leading) {
+                            Text("Screen Distance: \(Int(distance)) mm")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                            Slider(value: $distance, in: 500...3000, step: 100)
+                                .accentColor(.green)
+                            Text("Distance to projection screen")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
                 .padding()
@@ -252,7 +257,10 @@ class GratingScene: SKScene {
 
         for spot in spots {
             let normalizedIntensity = spot.intensity / maxIntensity
-            let glowRadius = CGFloat(10 + normalizedIntensity * 20)
+            let widthFactor: CGFloat = 5.0      // was 15.0
+            let circleRadius: CGFloat = 1.0     // was 2.5
+            let glowRadius_base: CGFloat = 2.0  // was 10.0
+            let glowRadius = CGFloat(glowRadius_base + normalizedIntensity * 20)
 
             // Create glow node
             let glowNode = SKShapeNode(circleOfRadius: glowRadius)
@@ -261,17 +269,17 @@ class GratingScene: SKScene {
                 red: 0,
                 green: CGFloat(normalizedIntensity),
                 blue: 0,
-                alpha: CGFloat(normalizedIntensity * 0.6)
+                alpha: CGFloat(normalizedIntensity * 0.1) // was 0.6
             )
             glowNode.strokeColor = .clear
-            glowNode.glowWidth = CGFloat(normalizedIntensity * 15)
+            glowNode.glowWidth = CGFloat(normalizedIntensity * widthFactor)
 
             addChild(glowNode)
             spotNodes.append(glowNode)
 
             // Create bright core
             if normalizedIntensity > 0.2 {
-                let coreNode = SKShapeNode(circleOfRadius: 2.5)
+                let coreNode = SKShapeNode(circleOfRadius: circleRadius)
                 coreNode.position = CGPoint(x: spot.x, y: spot.y)
                 coreNode.fillColor = UIColor(
                     red: 0.7,
