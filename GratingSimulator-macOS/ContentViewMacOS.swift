@@ -1,6 +1,6 @@
 //
-//  ContentView.swift
-//  GratingSimulator
+//  ContentViewMacOS.swift
+//  GratingSimulator-macOS
 //
 //  Created by Mark Barclay on 2/28/26.
 //
@@ -10,14 +10,13 @@ import SpriteKit
 import Combine
 
 // MARK: - Content View
-struct ContentView: View {
+struct ContentViewMacOS: View {
     @State private var angle: Double = INITIAL_ANGLE
     @State private var gratingPitch: Double = 10.0
     @State private var wavelength: Double = 532
     @State private var distance: Double = 1000
     @State private var maxOrder: Int = INITIAL_ORDER
     @StateObject private var sceneDelegate = SceneDelegate()
-
     var scene: GratingScene {
         let scene = sceneDelegate.scene
         scene.size = CGSize(width: 900, height: 900) // was 600
@@ -163,11 +162,18 @@ struct ContentView: View {
         }
         .background(Color(red: 0.1, green: 0.1, blue: 0.1))
         .edgesIgnoringSafeArea(.bottom)
+
+        // Maybe DELETE THIS...
+        // (from original starter app)
+        //    Image(systemName: "globe")
+        //        .imageScale(.large)
+        //        .foregroundStyle(.tint)
+        //    Text("Hello, Laser Grating Simulator!")
     }
 }
 
 // MARK: - Scene Delegate
-class SceneDelegate: ObservableObject {
+class SceneDelegateMacOS: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
     let scene: GratingScene
 
@@ -177,7 +183,7 @@ class SceneDelegate: ObservableObject {
 }
 
 // MARK: - SpriteKit Scene
-class GratingScene: SKScene {
+class GratingSceneMacOS: SKScene {
     var angle: Double = INITIAL_ANGLE { didSet { updatePattern() } }
     var gratingPitch: Double = 5.0 { didSet { updatePattern() } }
     var wavelength: Double = 532 { didSet { updatePattern() } }
@@ -362,8 +368,18 @@ class GratingScene: SKScene {
 }
 
 // MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
+struct ContentViewMacOS_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        // make a grid of 4 Content Views...
+        VStack() {
+            HStack() {
+                ContentViewMacOS()
+                ContentViewMacOS()
+            }
+            HStack() {
+                ContentViewMacOS()
+                ContentViewMacOS()
+            }
+        }
     }
 }

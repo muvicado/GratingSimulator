@@ -1,8 +1,9 @@
 //
 //  GratingSimulatorApp.swift
-//  GratingSimulator
 //
-//  Created by Mark Barclay on 12/22/25.
+//  GratingSimulatorApp.swift
+//
+//  Created by Mark Barclay on 2/28/26.
 //
 
 import SwiftUI

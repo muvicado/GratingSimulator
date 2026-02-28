@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		62F324512F53678700F34265 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F324502F53678700F34265 /* Configuration.swift */; };
+		62F324522F5367AE00F34265 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F324502F53678700F34265 /* Configuration.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		62F8C7332EF98476006CDF81 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,10 +30,22 @@
 
 /* Begin PBXFileReference section */
 		62F324402F533D2800F34265 /* GratingSimulator-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratingSimulator-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62F324502F53678700F34265 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		62F8C7232EF98475006CDF81 /* GratingSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratingSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8C7322EF98476006CDF81 /* GratingSimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratingSimulatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8C73C2EF98476006CDF81 /* GratingSimulatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratingSimulatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		62F3244C2F53429E00F34265 /* Exceptions for "GratingSimulator" folder in "GratingSimulator-macOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ContentView.swift,
+				Item.swift,
+			);
+			target = 62F3243F2F533D2800F34265 /* GratingSimulator-macOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		62F324412F533D2800F34265 /* GratingSimulator-macOS */ = {
@@ -38,6 +55,9 @@
 		};
 		62F8C7252EF98475006CDF81 /* GratingSimulator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				62F3244C2F53429E00F34265 /* Exceptions for "GratingSimulator" folder in "GratingSimulator-macOS" target */,
+			);
 			path = GratingSimulator;
 			sourceTree = "<group>";
 		};
@@ -88,6 +108,7 @@
 		62F8C71A2EF98475006CDF81 = {
 			isa = PBXGroup;
 			children = (
+				62F324502F53678700F34265 /* Configuration.swift */,
 				62F8C7252EF98475006CDF81 /* GratingSimulator */,
 				62F8C7352EF98476006CDF81 /* GratingSimulatorTests */,
 				62F8C73F2EF98476006CDF81 /* GratingSimulatorUITests */,
@@ -208,7 +229,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2620;
-				LastUpgradeCheck = 2610;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					62F3243F2F533D2800F34265 = {
 						CreatedOnToolsVersion = 26.2;
@@ -284,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F324522F5367AE00F34265 /* Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F324512F53678700F34265 /* Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = N72K8588E3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -366,6 +390,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = N72K8588E3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -451,6 +476,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -508,6 +534,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
