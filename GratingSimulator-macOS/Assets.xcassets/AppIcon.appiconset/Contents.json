@@ -41,11 +41,13 @@
       "size" : "256x256"
     },
     {
+      "filename" : "GratingSimulator-512x512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
+      "filename" : "GratingSimulator-1024x1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
