@@ -24,12 +24,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62F324402F533D2800F34265 /* GratingSimulator-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratingSimulator-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8C7232EF98475006CDF81 /* GratingSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratingSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8C7322EF98476006CDF81 /* GratingSimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratingSimulatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8C73C2EF98476006CDF81 /* GratingSimulatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratingSimulatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		62F324412F533D2800F34265 /* GratingSimulator-macOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "GratingSimulator-macOS";
+			sourceTree = "<group>";
+		};
 		62F8C7252EF98475006CDF81 /* GratingSimulator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GratingSimulator;
@@ -48,6 +54,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		62F3243D2F533D2800F34265 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62F8C7202EF98475006CDF81 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,6 +91,7 @@
 				62F8C7252EF98475006CDF81 /* GratingSimulator */,
 				62F8C7352EF98476006CDF81 /* GratingSimulatorTests */,
 				62F8C73F2EF98476006CDF81 /* GratingSimulatorUITests */,
+				62F324412F533D2800F34265 /* GratingSimulator-macOS */,
 				62F8C7242EF98475006CDF81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +102,7 @@
 				62F8C7232EF98475006CDF81 /* GratingSimulator.app */,
 				62F8C7322EF98476006CDF81 /* GratingSimulatorTests.xctest */,
 				62F8C73C2EF98476006CDF81 /* GratingSimulatorUITests.xctest */,
+				62F324402F533D2800F34265 /* GratingSimulator-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +110,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		62F3243F2F533D2800F34265 /* GratingSimulator-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62F3244A2F533D2900F34265 /* Build configuration list for PBXNativeTarget "GratingSimulator-macOS" */;
+			buildPhases = (
+				62F3243C2F533D2800F34265 /* Sources */,
+				62F3243D2F533D2800F34265 /* Frameworks */,
+				62F3243E2F533D2800F34265 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				62F324412F533D2800F34265 /* GratingSimulator-macOS */,
+			);
+			name = "GratingSimulator-macOS";
+			packageProductDependencies = (
+			);
+			productName = "GratingSimulator-macOS";
+			productReference = 62F324402F533D2800F34265 /* GratingSimulator-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		62F8C7222EF98475006CDF81 /* GratingSimulator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62F8C7462EF98476006CDF81 /* Build configuration list for PBXNativeTarget "GratingSimulator" */;
@@ -170,9 +207,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2610;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					62F3243F2F533D2800F34265 = {
+						CreatedOnToolsVersion = 26.2;
+					};
 					62F8C7222EF98475006CDF81 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
@@ -203,11 +243,19 @@
 				62F8C7222EF98475006CDF81 /* GratingSimulator */,
 				62F8C7312EF98476006CDF81 /* GratingSimulatorTests */,
 				62F8C73B2EF98476006CDF81 /* GratingSimulatorUITests */,
+				62F3243F2F533D2800F34265 /* GratingSimulator-macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		62F3243E2F533D2800F34265 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62F8C7212EF98475006CDF81 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +280,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		62F3243C2F533D2800F34265 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62F8C71F2EF98475006CDF81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +324,74 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		62F324482F533D2900F34265 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N72K8588E3;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.muvicadomindware.GratingSimulator-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		62F324492F533D2900F34265 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N72K8588E3;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.muvicadomindware.GratingSimulator-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		62F8C7442EF98476006CDF81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -541,6 +664,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		62F3244A2F533D2900F34265 /* Build configuration list for PBXNativeTarget "GratingSimulator-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62F324482F533D2900F34265 /* Debug */,
+				62F324492F533D2900F34265 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		62F8C71E2EF98475006CDF81 /* Build configuration list for PBXProject "GratingSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

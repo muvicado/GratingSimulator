@@ -4,19 +4,23 @@ import Combine
 
 // configuration
 let SHOW_NONESSENTIAL_SLIDERS = false
+let SHOW_CONFIGURATION = false
+let SHOW_GLOW_NODES = false
+let INITIAL_ORDER: Int = 2
+let INITIAL_ANGLE: Double = 28.25 // was 45
 
 // MARK: - Content View
 struct ContentView: View {
-    @State private var angle: Double = 45
+    @State private var angle: Double = INITIAL_ANGLE
     @State private var gratingPitch: Double = 10.0
     @State private var wavelength: Double = 532
     @State private var distance: Double = 1000
-    @State private var maxOrder: Int = 2
+    @State private var maxOrder: Int = INITIAL_ORDER
     @StateObject private var sceneDelegate = SceneDelegate()
 
     var scene: GratingScene {
         let scene = sceneDelegate.scene
-        scene.size = CGSize(width: 600, height: 600)
+        scene.size = CGSize(width: 900, height: 900) // was 600
         scene.scaleMode = SKSceneScaleMode.aspectFit
         scene.backgroundColor = .black
         return scene
@@ -25,15 +29,16 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Title
-            Text("Quad Grating Simulator")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.green)
-                .padding()
+            //Text("Quad Grating Simulator")
+            //    .font(.title2)
+            //    .fontWeight(.bold)
+            //    .foregroundColor(.green)
+            //    .padding()
 
             // SpriteKit Scene
             SpriteView(scene: scene)
-                .frame(maxWidth: .infinity, maxHeight: 600)
+                .layoutPriority(9)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.black)
                 .cornerRadius(12)
                 .overlay(
@@ -58,39 +63,45 @@ struct ContentView: View {
                 }
 
             // Controls
-            ScrollView {
+            ZStack(alignment: .topTrailing) {
                 VStack(alignment: .leading, spacing: 20) {
-                    // Grating Configuration Display
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Grating Configuration:")
-                            .font(.subheadline)
-                            .foregroundColor(.cyan)
+                    if SHOW_CONFIGURATION {
+                        // Grating Configuration Display
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Grating Configuration:")
+                                .font(.subheadline)
+                                .foregroundColor(.cyan)
 
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("• G0: 0° (fixed)")
-                            Text("• G1: 90° (fixed, ⟂ to G0)")
-                            Text("• G2: \(Int(angle))° (adjustable)")
-                                .foregroundColor(.yellow)
-                            Text("• G3: \(Int(angle) + 90)° (⟂ to G2)")
-                                .foregroundColor(.yellow)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("• G0: 0° (fixed)")
+                                Text("• G1: 90° (fixed, ⟂ to G0)")
+                                Text("• G2: \(Int(angle))° (adjustable)")
+                                    .foregroundColor(.yellow)
+                                Text("• G3: \(Int(angle) + 90)° (⟂ to G2)")
+                                    .foregroundColor(.yellow)
+                            }
+                            .font(.caption)
+                            .foregroundColor(.green)
                         }
-                        .font(.caption)
-                        .foregroundColor(.green)
+                        .padding()
+                        .background(Color(red: 0, green: 0.1, blue: 0.1))
+                        .cornerRadius(8)
                     }
-                    .padding()
-                    .background(Color(red: 0, green: 0.1, blue: 0.1))
-                    .cornerRadius(8)
 
                     // Pair Rotation Angle
                     VStack(alignment: .leading) {
-                        Text("Pair Rotation Angle: \(Int(angle))°")
+                        //let pairRotationAngle = Int(angle)
+                        let pairRotationAngle = angle
+                        let praStep = 0.25
+                        let maxRotationAngle = 45 // was 90
+                        Text("Pair Rotation Angle: \(pairRotationAngle)°")
                             .font(.subheadline)
                             .foregroundColor(.green)
-                        Slider(value: $angle, in: 0...90, step: 1)
+                        Slider(value: $angle, in: 0...45, step: praStep)
                             .accentColor(.green)
-                        Text("Angle between grating pairs (G0/G1 vs G2/G3)")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        //Text("Angle between grating pairs (G0/G1 vs G2/G3)")
+                        //    .font(.caption)
+                        //    .foregroundColor(.gray)
                     }
 
                     // Max Order
@@ -102,10 +113,10 @@ struct ContentView: View {
                             get: { Double(maxOrder) },
                             set: { maxOrder = Int($0) }
                         ), in: 1...4, step: 1)
-                            .accentColor(.green)
-                        Text("⚠️ Order 4 = \(Int(pow(Double(2 * 4 + 1), 4))) spots!")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        .accentColor(.green)
+                        //    Text("⚠️ Order 4 = \(Int(pow(Double(2 * 4 + 1), 4))) spots!")
+                        //        .font(.caption)
+                        //        .foregroundColor(.gray)
                     }
 
                     if SHOW_NONESSENTIAL_SLIDERS {
@@ -147,8 +158,8 @@ struct ContentView: View {
                     }
                 }
                 .padding()
+                .background(Color(red: 0.05, green: 0.05, blue: 0.05))
             }
-            .background(Color(red: 0.05, green: 0.05, blue: 0.05))
         }
         .background(Color(red: 0.1, green: 0.1, blue: 0.1))
         .edgesIgnoringSafeArea(.bottom)
@@ -167,11 +178,11 @@ class SceneDelegate: ObservableObject {
 
 // MARK: - SpriteKit Scene
 class GratingScene: SKScene {
-    var angle: Double = 0 { didSet { updatePattern() } }
-    var gratingPitch: Double = 10.0 { didSet { updatePattern() } }
+    var angle: Double = INITIAL_ANGLE { didSet { updatePattern() } }
+    var gratingPitch: Double = 5.0 { didSet { updatePattern() } }
     var wavelength: Double = 532 { didSet { updatePattern() } }
     var distance: Double = 1000 { didSet { updatePattern() } }
-    var maxOrder: Int = 3 { didSet { updatePattern() } }
+    var maxOrder: Int = INITIAL_ORDER { didSet { updatePattern() } }
 
     private var spotNodes: [SKNode] = []
 
@@ -193,15 +204,31 @@ class GratingScene: SKScene {
         let maxSinTheta = Double(maxOrder) * lambda / d
         guard maxSinTheta <= 1.0 else { return }
 
+        // For order 1, make more room around the dot pattern
+        let scaleMultiplier = switch maxOrder {
+        case 1: 0.5
+        case 2: 1.0
+        case 3: 1.5
+        case 4: 2.0
+        default: 1.0
+        }
+
         let maxTheta = asin(maxSinTheta)
-        let scale = size.width / (2 * L * tan(maxTheta) * 1.5)
+        let scale = size.width / (2 * L * tan(maxTheta) * 1.5) * scaleMultiplier
 
         let centerX = size.width / 2
         let centerY = size.height / 2
 
         // Grating angles
         let angleRad = angle * .pi / 180
-        let gratingAngles = [0.0, .pi / 2, angleRad, angleRad + .pi / 2]
+        let fudge = 0.002
+
+        let gratingAngles = [
+            0.0 + fudge,
+            .pi / 2,
+            angleRad + fudge,
+            angleRad + .pi / 2,
+        ]
 
         // Store spots
         struct Spot {
@@ -240,8 +267,11 @@ class GratingScene: SKScene {
                             y_total += displacement * sin(gratingAngles[i])
                         }
 
+                        let diminishFactor = -0.05 // was -0.15 -0.08
+
                         // Intensity
-                        let intensity = exp(-0.15 * Double(m0*m0 + m1*m1 + m2*m2 + m3*m3))
+                        let intensity = exp(diminishFactor * Double(m0*m0 + m1*m1 + m2*m2 + m3*m3))
+                        //let intensity = 2.0 * exp(-0.15 * Double(m0*m0 + m1*m1 + m2*m2 + m3*m3))
 
                         let px = centerX + CGFloat(x_total * scale)
                         let py = centerY + CGFloat(y_total * scale)
@@ -257,25 +287,28 @@ class GratingScene: SKScene {
 
         for spot in spots {
             let normalizedIntensity = spot.intensity / maxIntensity
-            let widthFactor: CGFloat = 5.0      // was 15.0
-            let circleRadius: CGFloat = 1.0     // was 2.5
-            let glowRadius_base: CGFloat = 2.0  // was 10.0
-            let glowRadius = CGFloat(glowRadius_base + normalizedIntensity * 20)
+            let widthFactor: CGFloat = 15.0      // was 15.0
+            let circleRadius: CGFloat = 2.5     // was 2.5
 
-            // Create glow node
-            let glowNode = SKShapeNode(circleOfRadius: glowRadius)
-            glowNode.position = CGPoint(x: spot.x, y: spot.y)
-            glowNode.fillColor = UIColor(
-                red: 0,
-                green: CGFloat(normalizedIntensity),
-                blue: 0,
-                alpha: CGFloat(normalizedIntensity * 0.1) // was 0.6
-            )
-            glowNode.strokeColor = .clear
-            glowNode.glowWidth = CGFloat(normalizedIntensity * widthFactor)
+            if SHOW_GLOW_NODES {
+                let glowRadius_base: CGFloat = 2.0  // was 10.0
+                let glowRadius = CGFloat(glowRadius_base + normalizedIntensity * 20)
 
-            addChild(glowNode)
-            spotNodes.append(glowNode)
+                // Create glow node
+                let glowNode = SKShapeNode(circleOfRadius: glowRadius)
+                glowNode.position = CGPoint(x: spot.x, y: spot.y)
+                glowNode.fillColor = UIColor(
+                    red: 0,
+                    green: CGFloat(normalizedIntensity),
+                    blue: 0,
+                    alpha: CGFloat(normalizedIntensity * 0.1) // was 0.6
+                )
+                glowNode.strokeColor = .clear
+                glowNode.glowWidth = CGFloat(normalizedIntensity * widthFactor)
+
+                addChild(glowNode)
+                spotNodes.append(glowNode)
+            }
 
             // Create bright core
             if normalizedIntensity > 0.2 {
