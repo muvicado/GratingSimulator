@@ -1,3 +1,10 @@
+//
+//  ContentView.swift
+//  GratingSimulator
+//
+//  Created by Mark Barclay on 2/28/26.
+//
+
 import SwiftUI
 import SpriteKit
 import Combine
@@ -29,11 +36,11 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Title
-            //Text("Quad Grating Simulator")
-            //    .font(.title2)
-            //    .fontWeight(.bold)
-            //    .foregroundColor(.green)
-            //    .padding()
+            Text("Quad Grating Simulator")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.green)
+                .padding()
 
             // SpriteKit Scene
             SpriteView(scene: scene)
