@@ -5,17 +5,6 @@
 //  Created by Mark Barclay on 2/28/26.
 //
 
-//import SwiftUI
-//
-//@main
-//struct GratingSimulator_macOSApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            ContentView()
-//        }
-//    }
-//}
-
 import SwiftUI
 import SwiftData
 
@@ -39,7 +28,8 @@ struct GratingSimulator_macOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentViewMacOS()
+            ContentView()
+            //ContentViewMacOS()
         }
         .modelContainer(sharedModelContainer)
     }

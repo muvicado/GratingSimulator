@@ -9,13 +9,6 @@ import SwiftUI
 import SpriteKit
 import Combine
 
-// configuration
-let SHOW_NONESSENTIAL_SLIDERS = false
-let SHOW_CONFIGURATION = false
-let SHOW_GLOW_NODES = false
-let INITIAL_ORDER: Int = 2
-let INITIAL_ANGLE: Double = 5.0 // 28.25 // was 45
-
 // MARK: - Content View
 struct ContentViewMacOS: View {
     @State private var angle: Double = INITIAL_ANGLE
@@ -180,7 +173,7 @@ struct ContentViewMacOS: View {
 }
 
 // MARK: - Scene Delegate
-class SceneDelegate: ObservableObject {
+class SceneDelegateMacOS: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
     let scene: GratingScene
 
@@ -190,7 +183,7 @@ class SceneDelegate: ObservableObject {
 }
 
 // MARK: - SpriteKit Scene
-class GratingScene: SKScene {
+class GratingSceneMacOS: SKScene {
     var angle: Double = INITIAL_ANGLE { didSet { updatePattern() } }
     var gratingPitch: Double = 5.0 { didSet { updatePattern() } }
     var wavelength: Double = 532 { didSet { updatePattern() } }

@@ -9,13 +9,6 @@ import SwiftUI
 import SpriteKit
 import Combine
 
-// configuration
-let SHOW_NONESSENTIAL_SLIDERS = false
-let SHOW_CONFIGURATION = false
-let SHOW_GLOW_NODES = false
-let INITIAL_ORDER: Int = 2
-let INITIAL_ANGLE: Double = 5.0 // 28.25 // was 45
-
 // MARK: - Content View
 struct ContentView: View {
     @State private var angle: Double = INITIAL_ANGLE
