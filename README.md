@@ -10,6 +10,7 @@ Laser transmitted through a diffraction grating filter.
 This could be used as a demonstration setup for physics education, teaching about wave optics, interference, and diffraction.
 
 Note:
+- Works on iOS (iPhone and iPad) and on macOS natively, using separete targets for iOS and macOS
 - The center spot is brightest (zero-order maximum)
 - There's good symmetry in the pattern
 - The spots gradually dim as you move away from center
@@ -18,4 +19,7 @@ Note:
 A green laser pointer shining through a diffraction grating onto a screen or wall.
 This is a classic physics demonstration that beautifully illustrates the wave nature of light and the principles of diffraction.
 
+## iOS
 <img width="1070" height="1481" alt="image" src="https://github.com/user-attachments/assets/89e27824-7f5a-45ac-841f-8b0991251d8b" />
+## macOS
+<img width="859" height="1075" alt="image" src="https://github.com/user-attachments/assets/abe8e115-9cf3-471e-a1f6-b81bbbfc788b" />
