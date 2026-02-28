@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ContentViewMacOS.swift
 //  GratingSimulator-macOS
 //
 //  Created by Mark Barclay on 2/28/26.
