@@ -7,7 +7,7 @@ let SHOW_NONESSENTIAL_SLIDERS = false
 let SHOW_CONFIGURATION = false
 let SHOW_GLOW_NODES = false
 let INITIAL_ORDER: Int = 2
-let INITIAL_ANGLE: Double = 28.25 // was 45
+let INITIAL_ANGLE: Double = 5.0 // 28.25 // was 45
 
 // MARK: - Content View
 struct ContentView: View {
@@ -221,7 +221,7 @@ class GratingScene: SKScene {
 
         // Grating angles
         let angleRad = angle * .pi / 180
-        let fudge = 0.002
+        let fudge = 0.000
 
         let gratingAngles = [
             0.0 + fudge,
@@ -288,7 +288,7 @@ class GratingScene: SKScene {
         for spot in spots {
             let normalizedIntensity = spot.intensity / maxIntensity
             let widthFactor: CGFloat = 15.0      // was 15.0
-            let circleRadius: CGFloat = 2.5     // was 2.5
+            let circleRadius: CGFloat = 1.5   // was 2.5
 
             if SHOW_GLOW_NODES {
                 let glowRadius_base: CGFloat = 2.0  // was 10.0
@@ -297,12 +297,23 @@ class GratingScene: SKScene {
                 // Create glow node
                 let glowNode = SKShapeNode(circleOfRadius: glowRadius)
                 glowNode.position = CGPoint(x: spot.x, y: spot.y)
-                glowNode.fillColor = UIColor(
-                    red: 0,
-                    green: CGFloat(normalizedIntensity),
-                    blue: 0,
-                    alpha: CGFloat(normalizedIntensity * 0.1) // was 0.6
+#if os(macOS)
+                // macOS-specific code
+                glowNode.fillColor = NSColor(
+                    red: 0.7,
+                    green: 1.0,
+                    blue: 0.7,
+                    alpha: CGFloat(normalizedIntensity)
                 )
+#else
+                // iOS-specific code
+                glowNode.fillColor = UIColor(
+                    red: 0.7,
+                    green: 1.0,
+                    blue: 0.7,
+                    alpha: CGFloat(normalizedIntensity)
+                )
+#endif
                 glowNode.strokeColor = .clear
                 glowNode.glowWidth = CGFloat(normalizedIntensity * widthFactor)
 
@@ -314,12 +325,23 @@ class GratingScene: SKScene {
             if normalizedIntensity > 0.2 {
                 let coreNode = SKShapeNode(circleOfRadius: circleRadius)
                 coreNode.position = CGPoint(x: spot.x, y: spot.y)
+#if os(macOS)
+                // macOS-specific code
+                coreNode.fillColor = NSColor(
+                    red: 0.7,
+                    green: 1.0,
+                    blue: 0.7,
+                    alpha: CGFloat(normalizedIntensity)
+                )
+#else
+                // iOS-specific code
                 coreNode.fillColor = UIColor(
                     red: 0.7,
                     green: 1.0,
                     blue: 0.7,
                     alpha: CGFloat(normalizedIntensity)
                 )
+#endif
                 coreNode.strokeColor = .clear
 
                 addChild(coreNode)
